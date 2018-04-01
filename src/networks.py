@@ -1,15 +1,15 @@
 # Main network and testnet3 definitions
 
-# Dash src/chainparams.cpp
+# Polis src/chainparams.cpp
 params = {
-    'dash_main': {
-        'pubkey_address': 76, #L120
-        'script_address': 16, #L122
-        'genesis_hash': '00000ffd590b1485b3caadc19b22e6379c733355108f107a430458cdf3407ab6' #L110
+    'polis_main': {
+        'pubkey_address': 55, #L120
+        'script_address': 56, #L122
+        'genesis_hash': '000009701eb781a8113b1af1d814e2f060f6408a2c990db291bc5108a1345c1e' #L110
     },
-    'dash_test': {
+    'polis_test': {
         'pubkey_address': 140, #L220
         'script_address': 19, #L222
-        'genesis_hash': '00000bafbc94add76cb75e2ec92894837288a481e5c005f6563d91623bf8bc2c' #L210
+        'genesis_hash': '0000009038aeaea86784e959b0b4002793adad39fc9d6f8789ed2edf99ad5c8b' #L210
     }
 }
