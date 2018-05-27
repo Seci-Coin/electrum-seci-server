@@ -1,9 +1,9 @@
 from setuptools import setup
 
 setup(
-    name="electrum-polis-server",
+    name="electrum-seci-server",
     version="1.0",
-    scripts=['run_electrum_polis_server','electrum-polis-server'],
+    scripts=['run_electrum_seci_server','electrum-seci-server'],
     install_requires=['plyvel','jsonrpclib', 'irc >= 11, <=14.0', 'x11_hash'],
     package_dir={
         'electrumserver':'src'
@@ -21,10 +21,10 @@ setup(
         'electrumserver.ircthread',
         'electrumserver.stratum_tcp'
     ],
-    description="Polis Electrum Server",
+    description="Seci Electrum Server",
     author="Thomas Voegtlin ,ELM4ever, Propulsion, TheLazieR",
     author_email="thomasv@electrum.org, thelazier@gmail.com",
     license="MIT Licence",
-    url="https://github.com/spesmilo/electrum-server/ , https://github.com/thelazier/electrum-polis-server/",
-    long_description="""Server for the Electrum Lightweight Polis Wallet"""
+    url="https://github.com/spesmilo/electrum-server/ , https://github.com/thelazier/electrum-seci-server/",
+    long_description="""Server for the Electrum Lightweight Seci Wallet"""
 )

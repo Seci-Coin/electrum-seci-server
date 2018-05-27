@@ -1,15 +1,15 @@
 # Main network and testnet3 definitions
 
-# Polis src/chainparams.cpp
+# Seci src/chainparams.cpp
 params = {
-    'polis_main': {
-        'pubkey_address': 55, #L120
-        'script_address': 56, #L122
-        'genesis_hash': '000009701eb781a8113b1af1d814e2f060f6408a2c990db291bc5108a1345c1e' #L110
+    'seci_main': {
+        'pubkey_address': 63, #L120
+        'script_address': 5, #L122
+        'genesis_hash': '00000d2e96a48dbbc13255fcfa039a61cf8511567d861543010c0bab630e0018' #L110
     },
-    'polis_test': {
-        'pubkey_address': 140, #L220
+    'seci_test': {
+        'pubkey_address': 127, #L220
         'script_address': 19, #L222
-        'genesis_hash': '0000009038aeaea86784e959b0b4002793adad39fc9d6f8789ed2edf99ad5c8b' #L210
+        'genesis_hash': '00000dbd0851f08eb802e0e822c9475512c04b402f9040b0d7b6bfd1b1356033' #L210
     }
 }

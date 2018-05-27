@@ -12,7 +12,7 @@ stratum_tcp_port = 50001
 #report_stratum_tcp_ssl_port = 50002
 banner = Welcome to Electrum!
 banner_file = /etc/electrum.banner
-# IRC connection for finding peers, #electrum-polis on Freenode IRC.
+# IRC connection for finding peers, #electrum-seci on Freenode IRC.
 #irc = no
 #irc_nick = <yournickname>
 # IRC prefix for mainnet is "D_" and testnet is "d_"
@@ -29,15 +29,15 @@ path =
 # for each address, history will be pruned if it is longer than this limit
 pruning_limit = 100
 
-# cache sizes in bytes, the default is optimized for ~4 GB RAM setups to run polisd alongside
+# cache sizes in bytes, the default is optimized for ~4 GB RAM setups to run secid alongside
 # If you have lots of RAM increase up to 16 times for best performance
 #hist_cache = 67108864
 #utxo_cache = 134217728
 #addr_cache = 16777216
 
-[polisd]
-polisd_host = localhost
-polisd_port = 8332
-# user and password from polis.conf
-polisd_user =
-polisd_password =
+[secid]
+secid_host = localhost
+secid_port = 8332
+# user and password from seci.conf
+secid_user =
+secid_password =
