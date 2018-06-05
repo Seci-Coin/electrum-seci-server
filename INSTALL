@@ -59,6 +59,10 @@ $ electrum-seci-server <start|stop|status|getinfo>
 
 The server will write a log file in its database path.
 
+You can view your electrum log by using tail: 
+
+$ tail -f /var/log/electrum.log
+
 
 5. Add electrum-seci-server to your system's services
 ------------------------------------------------
@@ -81,5 +85,7 @@ your machine is rebooted.
 
  * if you see "Too many open files" errors, you may need to increase
    your user's File Descriptors limit. For this, see
-http://www.cyberciti.biz/faq/linux-increase-the-maximum-number-of-open-files/
+   http://www.cyberciti.biz/faq/linux-increase-the-maximum-number-of-open-files/
 
+ *You need to properly shutdown your electrum server with electrum-seci-server stop or you may get db errors.
+  If you do get errors, delete the contents of your electrum db folder and let it resync. 

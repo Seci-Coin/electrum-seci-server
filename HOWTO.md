@@ -12,7 +12,7 @@ requirements.
 
 The most up-to date version of this document is available at:
 
-    https://github.com/secipay/electrum-seci-server/blob/master/HOWTO.md
+    https://github.com/Seci-Coin/electrum-seci-server/blob/master/HOWTO.md
 
 Conventions
 -----------
@@ -53,16 +53,16 @@ build chain. You will need root access in order to install other software or
 Python libraries. Python 2.7 is the minimum supported version.
 
 **Hardware.** The lightest setup is a pruning server with diskspace
-requirements of about 30 GB for the Electrum database (February 2016). However note that
+requirements of about 1 GB for the Electrum database. However note that
 you also need to run secid and keep a copy of the full blockchain,
-which is roughly 55 GB (February 2016). Ideally you have a machine with 16 GB of RAM
+which is roughly 2 GB (June 2018). Ideally you have a machine with 16 GB of RAM
 and an equal amount of swap. If you have ~2 GB of RAM make sure you limit secid 
-to 8 concurrent connections by disabling incoming connections. electrum-server may
+to 8 concurrent connections by disabling incoming connections. electrum-seci-server may
 bail-out on you from time to time with less than 4 GB of RAM, so you might have to 
 monitor the process and restart it. You can tweak cache sizes in the config to an extend
 but most RAM will be used to process blocks and catch-up on initial start.
 
-CPU speed is less important than fast I/O speed. electrum-server makes uses of one core 
+CPU speed is less important than fast I/O speed. electrum-seci-server makes uses of one core 
 only leaving spare cycles for secid. Fast single core CPU power helps for the initial 
 block chain import. Any multi-core x86 CPU with CPU Mark / PassMark > 1500 will work
 (see https://www.cpubenchmark.net/). An ideal setup in February 2016 has 16 GB+ RAM and
@@ -97,10 +97,9 @@ Recommend downloading latest version directly from Seci.org
 
     $ sudo apt-get install make g++ python-leveldb libboost-all-dev libssl-dev libdb++-dev pkg-config libevent-dev
     $ sudo su - seci
-    $ cd ~/src && wget https://www.seci.org/binaries/seci-0.12.0.57-linux64.tar.gz
-    $ sha256sum seci-0.12.0.57-linux64.tar.gz | grep 2a29b529c56d2ba41e28dfb20872861d6b48bdfe4fb327bfd2273123b38139aa
-    $ tar xfz seci-0.12.0.57-linux64.tar.gz
-    $ cd seci-0.12.0/bin
+    $ cd ~/src && wget https://github.com/Seci-Coin/Seci/archive/1.15.1.1.tar.gz
+    $ tar xfz 1.15.1.1.tar.gz
+    $ cd Seci-1.15.1.1/bin
     $ cp -a secid seci-cli seci-tx ~/bin
 
 ### Step 3. Configure and start secid
@@ -145,7 +144,7 @@ find out the best way to do this.
 We will download the latest git snapshot for Electrum to configure and install it:
 
     $ cd ~
-    $ git clone https://github.com/secipay/electrum-seci-server.git
+    $ git clone https://github.com/Seci-Coin/electrum-seci-server.git
     $ cd electrum-seci-server
     $ sudo apt-get install python-setuptools
     $ sudo ./configure
@@ -162,9 +161,9 @@ package manager if you don't want to use the install routine.
     $ sudo apt-get install python-setuptools python-openssl python-leveldb libleveldb-dev
     $ sudo easy_install jsonrpclib irc plyvel x11_hash
 
-For the python irc module please note electrum-server currently only supports versions between 11 and 14.0. 
-The setup.py takes care of installing a supported version but be aware of it when installing or upgrading
-manually.
+For the python irc module please note electrum-seci-server currently only supports versions between 11 and 14.0. 
+Anything above irc 14.0 will cause the install to fail. The setup.py takes care of installing a supported version 
+but be aware of it when installing or upgrading manually.
 
 Regarding leveldb, see the steps in README.leveldb for further details, especially if your system
 doesn't have the python-leveldb package or if plyvel installation fails.
@@ -204,7 +203,7 @@ Sadly there is no host server for these files as of yet.:
 
 Alternatively, if you have the time and nerve, you can import the blockchain yourself.
 
-As of April 2014 it takes between two days and over a week to import 300k blocks, depending
+As of June 2018 it takes around 5 minutes to sync, depending
 on CPU speed, I/O speed, and your selected pruning limit.
 
 It's considerably faster and strongly recommended to index in memory. You can use /dev/shm or
@@ -219,10 +218,6 @@ used parts. It's fine to use a file on an SSD for swap in this case.
 It's not recommended to do initial indexing of the database on an SSD because the indexing process
 does at least 20 TB (!) of disk writes and puts considerable wear-and-tear on an SSD. It's a lot better
 to use tmpfs and just swap out to disk when necessary.
-
-Databases have grown to roughly 30 GB as of February 2016. Leveldb prunes the database from time to time,
-so it's not uncommon to see databases ~50% larger at times when it's writing a lot, especially when
-indexing from the beginning.
 
 
 ### Step 8. Create a self-signed SSL cert
@@ -246,7 +241,7 @@ When asked for a challenge password just leave it empty and press enter.
     ...
     Country Name (2 letter code) [AU]:US
     State or Province Name (full name) [Some-State]:California
-    Common Name (eg, YOUR name) []: electrum-server.tld
+    Common Name (eg, YOUR name) []: electrum-seci-server.tld
     ...
     A challenge password []:
     ...
@@ -311,14 +306,14 @@ Two more things for you to consider:
    you may want to close secid for incoming connections and connect outbound only. Most servers do run
    full nodes with open incoming connections though.
 
-2. Consider restarting secid (together with electrum-server) on a weekly basis to clear out unconfirmed
+2. Consider restarting secid (together with electrum-seci-server) on a weekly basis to clear out unconfirmed
    transactions from the local the memory pool which did not propagate over the network.
 
 ### Step 11. (Finally!) Run Electrum Seci server
 
 The magic moment has come: you can now start your Electrum Seci server as root (it will su to your unprivileged user):
 
-    # electrum-server start
+    # electrum-seci-server start
 
 Note: If you want to run the server without installing it on your system, just run 'run_electrum_server" as the
 unprivileged user.
@@ -335,15 +330,18 @@ The important pieces to you are at the end. In this example, the server has to c
 
 If you want to stop Electrum Seci server, use the 'stop' command:
 
-    # electrum-server stop
+    # electrum-seci-server stop
 
+If you want you need to check if electrum is running, use:
 
-If your system supports it, you may add electrum-server to the /etc/init.d directory.
+    # electrum-seci-server status
+
+If your system supports it, you may add electrum-seci-server to the /etc/init.d directory.
 This will ensure that the server is started and stopped automatically, and that the database is closed
 safely whenever your machine is rebooted.
 
-    # ln -s `which electrum-server` /etc/init.d/electrum-server
-    # update-rc.d electrum-server defaults
+    # ln -s `which electrum-seci-server` /etc/init.d/electrum-seci-server
+    # update-rc.d electrum-seci-server defaults
 
 ### Step 12. Test the Electrum Seci server
 
